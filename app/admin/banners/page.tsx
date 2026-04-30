@@ -63,9 +63,15 @@ export default function BannersPage() {
   }
 
   const upload = async () => {
-    if (!form.id || !form.click_url || !fileRef.current?.files?.[0]) {
-      return showMsg('Vui lòng điền ID, link và chọn ảnh!', true)
-    }
+  console.log('form.id:', form.id)
+  console.log('form.click_url:', form.click_url)
+  console.log('fileRef:', fileRef.current)
+  console.log('files:', fileRef.current?.files)
+  console.log('file[0]:', fileRef.current?.files?.[0])
+  
+  if (!form.id || !form.click_url || !fileRef.current?.files?.[0]) {
+    return showMsg('Vui lòng điền ID, link và chọn ảnh!', true)
+  }
     setSaving(true)
     try {
       const fd = new FormData()
