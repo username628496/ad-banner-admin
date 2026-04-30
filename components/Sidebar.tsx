@@ -1,12 +1,11 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Image, Link2, Zap, Building2 } from 'lucide-react'
+import { Image, Zap, Building2 } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/brands', label: 'Nhà Cái', icon: Building2 },
+  { href: '/admin/brands', label: 'Brands', icon: Building2 },
   { href: '/admin/banners', label: 'Banners', icon: Image },
 ]
 
@@ -26,43 +25,34 @@ export default function Sidebar() {
       display: 'flex',
       flexDirection: 'column',
     }}>
-      {/* Logo area */}
       <div style={{ padding: '16px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '30px',
-            height: '30px',
+            width: '32px', height: '32px',
             background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            borderRadius: '9px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0,
+            boxShadow: '0 2px 6px rgba(37,99,235,0.35)',
           }}>
             <Zap size={15} color="white" fill="white" />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>AdBanner</span>
-            <span style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: 1.2 }}>v4.0</span>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text)', lineHeight: 1.2 }}>AdBanner</div>
+            <div style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: 1.4 }}>Admin v4.0</div>
           </div>
         </div>
       </div>
 
-      {/* Nav section */}
-      <nav style={{ flex: 1, padding: '10px 8px' }}>
+      <nav style={{ flex: 1, padding: '12px 8px' }}>
         <div style={{
-          fontSize: '10px',
-          fontWeight: 600,
-          color: 'var(--text-muted)',
-          padding: '8px 8px 5px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
+          fontSize: '10px', fontWeight: 600, color: 'var(--text-muted)',
+          padding: '6px 8px 8px', textTransform: 'uppercase', letterSpacing: '0.07em',
         }}>
-          MENU
+          Navigation
         </div>
-
         {navItems.map(({ href, label, icon: Icon }) => {
-          const isActive = pathname === href
+          const isActive = pathname.startsWith(href)
           return (
             <Link
               key={href}
@@ -70,39 +60,30 @@ export default function Sidebar() {
               onMouseEnter={() => setHovered(href)}
               onMouseLeave={() => setHovered(null)}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '9px',
-                padding: isActive ? '7px 7px' : '7px 10px',
-                paddingLeft: isActive ? '7px' : '10px',
-                borderRadius: 'var(--radius-sm)',
+                display: 'flex', alignItems: 'center', gap: '9px',
+                padding: '8px 10px',
+                borderRadius: '7px',
                 textDecoration: 'none',
                 fontSize: '13px',
-                marginBottom: '2px',
-                transition: 'all 0.1s',
                 fontWeight: isActive ? 600 : 400,
-                color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
-                background: isActive
-                  ? 'var(--accent-light)'
-                  : hovered === href
-                    ? '#F1F5F9'
-                    : 'transparent',
-                borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
+                marginBottom: '2px',
+                transition: 'all 0.12s',
+                color: isActive ? '#2563EB' : 'var(--text-secondary)',
+                background: isActive ? '#EFF6FF' : hovered === href ? '#F8FAFC' : 'transparent',
+                borderLeft: `3px solid ${isActive ? '#2563EB' : 'transparent'}`,
               }}
             >
-              <Icon size={14} />
+              <Icon size={15} strokeWidth={isActive ? 2.2 : 1.8} />
               {label}
             </Link>
           )
         })}
       </nav>
 
-      {/* Footer */}
       <div style={{
         padding: '12px 16px',
         borderTop: '1px solid var(--border)',
-        fontSize: '11px',
-        color: 'var(--text-muted)',
+        fontSize: '11px', color: 'var(--text-muted)',
       }}>
         Ad Banner System
       </div>
